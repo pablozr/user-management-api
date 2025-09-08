@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     @ExceptionHandler(UserJaExistenteException.class)
     public ResponseEntity<ApiResponseDTO<Object>> handleUserAlreadyExists(UserJaExistenteException ex){
-            ApiResponseDTO<Object> response = ApiResponseDTO.error(ex.getMessage());
+            ApiResponseDTO<Object> response = ApiResponseDTO.error(ex.getMessage(),HttpStatus.CONFLICT);
             return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 }

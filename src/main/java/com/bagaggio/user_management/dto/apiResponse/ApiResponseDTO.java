@@ -2,6 +2,7 @@ package com.bagaggio.user_management.dto.apiResponse;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import org.springframework.http.HttpStatus;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
@@ -28,7 +29,7 @@ public class ApiResponseDTO<T> {
         return new ApiResponseDTO<>(201, message, data);
     }
 
-    public static <T> ApiResponseDTO<T> error(String message){
-        return new ApiResponseDTO<>(200, message, null);
+    public static <T> ApiResponseDTO<T> error(String message, HttpStatus status){
+        return new ApiResponseDTO<>(status.value(), message, null);
     }
 }
