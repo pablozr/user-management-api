@@ -13,4 +13,16 @@ public class GlobalExceptionHandler {
             ApiResponseDTO<Object> response = ApiResponseDTO.error(ex.getMessage(),HttpStatus.CONFLICT);
             return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponseDTO<Object>> handleGenericException(Exception ex){
+        ApiResponseDTO<Object> response = ApiResponseDTO.error("Ocorreu um erro inesperado.",HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(EmailJaCadastradoException.class)
+    public ResponseEntity<ApiResponseDTO<Object>> handleEmailAlreadyExists(EmailJaCadastradoException ex) {
+        ApiResponseDTO<Object> response = ApiResponseDTO.error(ex.getMessage(), HttpStatus.CONFLICT);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
 }
