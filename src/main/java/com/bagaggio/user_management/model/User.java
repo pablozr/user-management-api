@@ -3,11 +3,14 @@ package com.bagaggio.user_management.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -18,8 +21,11 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
+    private String roles;
+
     @Column(nullable = false, unique = true)
-    private String username;
+    private String displayName;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -38,9 +44,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Se você tiver roles/perfis, a lógica para retorná-los entraria aqui.
-        // Por enquanto, podemos retornar uma lista vazia.
-        return Collections.emptyList();
+        return Collections.singleton(new SimpleGrantedAuthority(this.roles));
     }
 
     @Override

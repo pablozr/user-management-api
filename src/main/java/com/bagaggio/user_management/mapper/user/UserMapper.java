@@ -13,7 +13,7 @@ public class UserMapper {
 
         UserResponseDTO responseDTO = new UserResponseDTO();
         responseDTO.setId(user.getId());
-        responseDTO.setUsername(user.getUsername());
+        responseDTO.setUsername(user.getDisplayName());
         responseDTO.setEmail(user.getEmail());
         return responseDTO;
     }
@@ -23,7 +23,7 @@ public class UserMapper {
 
         User user = new User();
         user.setEmail(registerDTO.getEmail());
-        user.setUsername(registerDTO.getUsername());
+        user.setDisplayName(registerDTO.getUsername());
         user.setPassword(registerDTO.getPassword());
         return user;
     }

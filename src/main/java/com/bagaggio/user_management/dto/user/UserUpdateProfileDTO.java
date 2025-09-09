@@ -6,17 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserUpdateProfileDTO {
-    @Nullable
     private String nomeCompleto;
-    @Nullable
     private String bio;
-    @Nullable
     @Email(message = "Formato de email invalido")
     private String email;
-    @Nullable
-    private String dataNascimento;
+    private LocalDate dataNascimento;
 }
