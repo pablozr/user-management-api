@@ -44,7 +44,7 @@ public class UserController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ApiResponseDTO<User>> getUserProfileById(@PathVariable Long id){
         User user = userService.getUserById(id);
-        ApiResponseDTO<User> response = ApiResponseDTO.sucess(user,"Perfil recuperado com sucesso.");
+        ApiResponseDTO<User> response = ApiResponseDTO.sucess(user,"Usuario recuperado com sucesso.");
         return ResponseEntity.ok(response);
     }
 
