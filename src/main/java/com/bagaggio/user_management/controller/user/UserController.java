@@ -1,8 +1,7 @@
-package com.bagaggio.user_management.controller.auth;
+package com.bagaggio.user_management.controller.user;
 
 import com.bagaggio.user_management.dto.apiResponse.ApiResponseDTO;
 import com.bagaggio.user_management.dto.user.UserProfileDTO;
-import com.bagaggio.user_management.dto.user.UserResponseDTO;
 import com.bagaggio.user_management.dto.user.UserUpdateProfileDTO;
 import com.bagaggio.user_management.model.User;
 import com.bagaggio.user_management.service.UserService;
