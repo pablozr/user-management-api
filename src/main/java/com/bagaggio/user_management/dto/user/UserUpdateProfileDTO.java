@@ -1,6 +1,5 @@
 package com.bagaggio.user_management.dto.user;
 
-import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -6,14 +6,11 @@ import com.bagaggio.user_management.dto.login.LoginResponseDTO;
 import com.bagaggio.user_management.dto.user.UserRegisterDTO;
 import com.bagaggio.user_management.dto.user.UserResponseDTO;
 import com.bagaggio.user_management.service.AuthService;
-import com.bagaggio.user_management.service.JwtService;
 import com.bagaggio.user_management.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
