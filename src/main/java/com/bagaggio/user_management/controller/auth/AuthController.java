@@ -36,7 +36,7 @@ public class AuthController {
     public ResponseEntity<ApiResponseDTO<LoginResponseDTO>> login(@Valid @RequestBody LoginDTO loginDTO){
 
         LoginResponseDTO loginResponseDTO = authService.login(loginDTO);
-        ApiResponseDTO<LoginResponseDTO> response = ApiResponseDTO.sucess(loginResponseDTO, "Login bem-sucedido");
+        ApiResponseDTO<LoginResponseDTO> response = ApiResponseDTO.success(loginResponseDTO, "Login bem sucedido");
 
         return ResponseEntity.ok(response);
     }

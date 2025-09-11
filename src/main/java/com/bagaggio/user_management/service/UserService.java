@@ -47,7 +47,7 @@ public class UserService {
         return userMapper.toResponseDTO(savedUser);
     }
 
-    public UserProfileDTO getSelftUserProfile(){
+    public UserProfileDTO getSelfUserProfile(){
         User currentUser = getAuthenticatedUser();
         return userMapper.toProfileDTO(currentUser);
     }
@@ -79,7 +79,7 @@ public class UserService {
         User updatedUser = userRepository.save(userExists);
 
         if(emailWasUpdated){
-            request.getSession().invalidate();
+            request.getSession(false);
             SecurityContextHolder.clearContext();
         }
         return userMapper.toProfileDTO(updatedUser);

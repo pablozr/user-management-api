@@ -24,11 +24,11 @@ public class UserRegisterDTO {
     private String email;
 
     @NotBlank(message = "A senha nao pode ser vazia.")
-    @Size(message = "A senha deve ter no minimo 8 caracteres.")
+    @Size(min = 8, message = "A senha deve ter no minimo 8 caracteres.")
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$", message = "A senha deve ter letras minusculas, maiusculas e numeros.")
     private String password;
 
-    @Size(max = 500, message = "A bio deve ter no maximo 250 caracteres.")
+    @Size(max = 500, message = "A bio deve ter no maximo 500 caracteres.")
     private String bio;
 
     @Size(max = 100, message = "O nome completo deve ter no maximo 100 caracteres.")

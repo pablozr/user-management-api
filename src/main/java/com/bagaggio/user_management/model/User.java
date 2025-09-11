@@ -33,8 +33,8 @@ public class User implements UserDetails {
     @Column(nullable = true, length = 500)
     private String bio;
 
-    @Column(nullable = true)
-    private String NomeCompleto;
+    @Column(name = "NomeCompleto", nullable = true)
+    private String nomeCompleto;
 
     @Column(nullable = true)
     private LocalDate dataNascimento;

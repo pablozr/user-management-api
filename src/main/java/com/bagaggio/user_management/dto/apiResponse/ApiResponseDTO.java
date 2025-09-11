@@ -17,11 +17,11 @@ public class ApiResponseDTO<T> {
         this.data = data;
     }
 
-    public static <T> ApiResponseDTO<T> sucess(T data, String message){
+    public static <T> ApiResponseDTO<T> success(T data, String message){
         return new ApiResponseDTO<>(200, message, data);
     }
 
-    public static <T> ApiResponseDTO<T> sucess(String message){
+    public static <T> ApiResponseDTO<T> success(String message){
         return new ApiResponseDTO<>(200, message, null);
     }
 

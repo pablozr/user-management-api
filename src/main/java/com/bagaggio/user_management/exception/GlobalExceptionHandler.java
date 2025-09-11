@@ -57,7 +57,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<ApiResponseDTO<Object>> handleBadCredentialsException(org.springframework.security.authentication.BadCredentialsException ex){
+    public ResponseEntity<ApiResponseDTO<Object>> handleBadCredentialsException(BadCredentialsException ex){
         log.error("Credenciais inválidas: ", ex);
         ApiResponseDTO<Object> response = ApiResponseDTO.error("Credenciais inválidas.",HttpStatus.UNAUTHORIZED);
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);

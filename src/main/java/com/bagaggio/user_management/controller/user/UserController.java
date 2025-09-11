@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/users")
@@ -20,30 +21,30 @@ public class UserController {
 
     @GetMapping("/me")
     public ResponseEntity<ApiResponseDTO<UserProfileDTO>> getProfile(){
-        UserProfileDTO userProfile = userService.getSelftUserProfile();
-        ApiResponseDTO<UserProfileDTO> response = ApiResponseDTO.sucess(userProfile,"Perfil recuperado com sucesso.");
+        UserProfileDTO userProfile = userService.getSelfUserProfile();
+        ApiResponseDTO<UserProfileDTO> response = ApiResponseDTO.success(userProfile,"Perfil recuperado com sucesso.");
         return ResponseEntity.ok(response);
     }
 
     @PatchMapping("/me")
-    public ResponseEntity<ApiResponseDTO<UserProfileDTO>> updateProfile(@RequestBody UserUpdateProfileDTO userProfileDTO, HttpServletRequest request) {
+    public ResponseEntity<ApiResponseDTO<UserProfileDTO>> updateProfile(@Valid @RequestBody UserUpdateProfileDTO userProfileDTO, HttpServletRequest request) {
         UserProfileDTO updatedProfile = userService.updateSelfUserProfile(userProfileDTO,request);
-        ApiResponseDTO<UserProfileDTO> response = ApiResponseDTO.sucess(updatedProfile, "Perfil atualizado com sucesso.");
+        ApiResponseDTO<UserProfileDTO> response = ApiResponseDTO.success(updatedProfile, "Perfil atualizado com sucesso.");
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/me")
     public ResponseEntity<ApiResponseDTO<Object>> deleteProfile() {
         userService.deleteSelfUserProfile();
-        ApiResponseDTO<Object> response = ApiResponseDTO.sucess(null, "Perfil deletado com sucesso.");
+        ApiResponseDTO<Object> response = ApiResponseDTO.success(null, "Perfil deletado com sucesso.");
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponseDTO<User>> getUserProfileById(@PathVariable Long id){
         User user = userService.getUserById(id);
-        ApiResponseDTO<User> response = ApiResponseDTO.sucess(user,"Usuario recuperado com sucesso.");
+        ApiResponseDTO<User> response = ApiResponseDTO.success(user,"Usuario recuperado com sucesso.");
         return ResponseEntity.ok(response);
     }
 
@@ -51,7 +52,7 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponseDTO<Object>> deleteUserById(@PathVariable Long id) {
         userService.deleteUserById(id);
-        ApiResponseDTO<Object> response = ApiResponseDTO.sucess(null, "Usuario deletado com sucesso.");
+        ApiResponseDTO<Object> response = ApiResponseDTO.success(null, "Usuario deletado com sucesso.");
         return ResponseEntity.ok(response);
     }
 }
