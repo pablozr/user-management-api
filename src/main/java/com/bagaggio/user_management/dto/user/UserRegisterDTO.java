@@ -24,7 +24,6 @@ public class UserRegisterDTO {
     private String email;
 
     @NotBlank(message = "A senha nao pode ser vazia.")
-    @Size(message = "A senha deve ter no minimo 8 caracteres.")
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$", message = "A senha deve ter letras minusculas, maiusculas e numeros.")
     private String password;
 

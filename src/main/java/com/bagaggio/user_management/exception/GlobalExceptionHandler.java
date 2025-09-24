@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -63,11 +64,22 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiResponseDTO<Object>> handleValidationException(MethodArgumentNotValidException ex){
+        log.error("Erro de validação: ", ex);
+        String errorMessage = ex.getBindingResult().getAllErrors().stream()
+                .map(error -> error.getDefaultMessage())
+                .findFirst()
+                .orElse("Erro de validação nos dados fornecidos.");
+
+        ApiResponseDTO<Object> response = ApiResponseDTO.error(errorMessage,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponseDTO<Object>> handleGenericException(Exception ex){
         log.error("Erro inesperado: ", ex);
         ApiResponseDTO<Object> response = ApiResponseDTO.error("Ocorreu um erro inesperado.",HttpStatus.INTERNAL_SERVER_ERROR);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 }
